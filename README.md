@@ -66,4 +66,3 @@ Confirms a user's registration.
   **Content:** `{ "message": "User confirmed successfully." }`
 
 
-## Usage
