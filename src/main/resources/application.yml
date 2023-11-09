@@ -5,7 +5,7 @@ server:
 
 spring:
   datasource:
-    password:
+    password: 
     url:
     username:
   jpa:
@@ -20,8 +20,8 @@ spring:
   mail:
     host: localhost
     port: 1025
-    username:
-    password: 
+    username: hello
+    password: hello
 
     properties:
       mail:
