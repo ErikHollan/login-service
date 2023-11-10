@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @CrossOrigin
 @RestController
 @AllArgsConstructor
@@ -13,19 +15,15 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
 
     private final LoginService loginService;
-
     private final JwtTokenProvider jwtTokenProvider;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        String token = loginService.authenticateUser(loginRequest);
-        return ResponseEntity.ok(new JwtResponse(token));
+    public ResponseEntity<Map<String, Object>> login(@RequestBody LoginRequest loginRequest) {
+        return loginService.authenticateUser(loginRequest);
     }
 
     @GetMapping("/check")
     public String test (@RequestParam("token") String token){
         return jwtTokenProvider.getEmailFromToken(token);
     }
-
-
 }
