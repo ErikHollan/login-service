@@ -1,11 +1,13 @@
-package com.example.loginservice.registration;
+package com.example.loginservice.auth.registration;
 
 import com.example.loginservice.appuser.AppUser;
 import com.example.loginservice.appuser.AppUserRole;
 import com.example.loginservice.appuser.AppUserService;
+import com.example.loginservice.auth.ApiResponse;
 import com.example.loginservice.email.EmailSender;
-import com.example.loginservice.registration.token.ConfirmationToken;
-import com.example.loginservice.registration.token.ConfirmationTokenService;
+import com.example.loginservice.auth.registration.token.ConfirmationToken;
+import com.example.loginservice.auth.registration.token.ConfirmationTokenService;
+import com.example.loginservice.email.EmailValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,11 +23,11 @@ public class RegistrationService {
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailSender emailSender;
 
-    public String register(RegistrationRequest request) {
+    public ApiResponse register(RegistrationRequest request) {
         boolean isValidEmail = emailValidator.test(request.getEmail());
 
         if (!isValidEmail) {
-            throw new IllegalStateException(request.getEmail() + " is not a valid email");
+            return new ApiResponse("Registration", 500, request.getEmail() + " is not a valid email", null);
         }
         String token = appUserService.signUpUser(
                 new AppUser(
@@ -41,7 +43,8 @@ public class RegistrationService {
         String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
 
         emailSender.send(request.getEmail(), buildEmail(request.getFirstName(), link));
-        return token;
+
+        return new ApiResponse("Registration", 200, "Registration successful", token);
     }
 
     @Transactional

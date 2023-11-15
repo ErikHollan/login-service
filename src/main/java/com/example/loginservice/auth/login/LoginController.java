@@ -1,6 +1,6 @@
-package com.example.loginservice.login;
+package com.example.loginservice.auth.login;
 
-import com.example.loginservice.security.JwtResponse;
+import com.example.loginservice.auth.ApiResponse;
 import com.example.loginservice.security.JwtTokenProvider;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +18,13 @@ public class LoginController {
     private final JwtTokenProvider jwtTokenProvider;
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody LoginRequest loginRequest) {
-        return loginService.authenticateUser(loginRequest);
+    public ResponseEntity<ApiResponse> login(@RequestBody LoginRequest loginRequest) {
+        ApiResponse response = loginService.authenticateUser(loginRequest);
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     @GetMapping("/check")
-    public String test (@RequestParam("token") String token){
+    public String test(@RequestParam("token") String token) {
         return jwtTokenProvider.getEmailFromToken(token);
     }
 }

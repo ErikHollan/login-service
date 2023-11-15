@@ -1,6 +1,8 @@
-package com.example.loginservice.registration;
+package com.example.loginservice.auth.registration;
 
+import com.example.loginservice.auth.ApiResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,8 +13,9 @@ public class RegistrationController {
     private final RegistrationService registrationService;
 
     @PostMapping
-    public String register(@RequestBody RegistrationRequest request){
-        return registrationService.register(request);
+    public ResponseEntity<ApiResponse>register(@RequestBody RegistrationRequest request) {
+        ApiResponse response = registrationService.register(request);
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     @GetMapping(path = "confirm")

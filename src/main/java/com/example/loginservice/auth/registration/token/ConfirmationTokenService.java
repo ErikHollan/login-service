@@ -1,8 +1,6 @@
-package com.example.loginservice.registration.token;
+package com.example.loginservice.auth.registration.token;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

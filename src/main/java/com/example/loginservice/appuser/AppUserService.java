@@ -1,15 +1,13 @@
 package com.example.loginservice.appuser;
 
-import com.example.loginservice.registration.token.ConfirmationToken;
-import com.example.loginservice.registration.token.ConfirmationTokenService;
+import com.example.loginservice.auth.registration.token.ConfirmationToken;
+import com.example.loginservice.auth.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

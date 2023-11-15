@@ -1,4 +1,4 @@
-package com.example.loginservice.registration.token;
+package com.example.loginservice.auth.registration.token;
 
 import com.example.loginservice.appuser.AppUser;
 import jakarta.persistence.*;
