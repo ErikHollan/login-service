@@ -15,7 +15,7 @@ public class LoginErrorHandling {
         } else if (e instanceof DisabledException) {
             return "Account disabled";
         } else {
-            return  "Authentication failed";
+            return "Authentication failed";
         }
     }
 }
